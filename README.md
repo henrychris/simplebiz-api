@@ -40,6 +40,24 @@ To set up and run the application locally, follow these steps:
         "UserName": "{Username}",
         "UseSsl": false,
         "UseStartTls": true
+    },
+    KeyVault": {
+        "AZURE_CLIENT_ID": "",
+        "AZURE_CLIENT_SECRET": "",
+        "AZURE_STORAGE_CONNECTION_STRING": "",
+        "AZURE_TENANT_ID": "",
+        "BLOB_CONTAINER_NAME": "",
+        "Vault": "kluster-api"
+    },
+    "PaystackSettings": {
+        "AllowedIPs": [],
+        "BaseUrl": "",
+        "PublicKey": "",
+        "SecretKey": ""
+    },
+    "SeqSettings": {
+        "BaseUrl": "",
+		"ApiKey":""
     }
 }
 ```
