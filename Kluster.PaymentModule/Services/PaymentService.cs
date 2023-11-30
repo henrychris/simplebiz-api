@@ -69,6 +69,7 @@ public class PaymentService(
         var invoice = await context.Invoices.FirstOrDefaultAsync(x => x.InvoiceNo == invoiceNo);
         if (invoice is null)
         {
+            logger.LogError("Invoice {0} not found.", invoiceNo);
             return SharedErrors<Invoice>.NotFound;
         }
 
@@ -76,12 +77,14 @@ public class PaymentService(
         var payment = await context.Payments.FirstOrDefaultAsync(x => x.InvoiceId == invoiceNo);
         if (payment is null)
         {
+            logger.LogError("Payment not found for invoice {0}.", invoiceNo);
             return SharedErrors<Payment>.NotFound;
         }
 
         // we only want incomplete payments
-        if (!payment.IsCompleted)
+        if (payment.IsCompleted)
         {
+            logger.LogError("Payment has already been made for invoice {0}.", invoiceNo);
             return Errors.Invoice.PaymentAlreadyCompleted;
         }
 

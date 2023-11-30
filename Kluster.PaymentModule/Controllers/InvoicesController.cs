@@ -21,6 +21,7 @@ public class InvoicesController(IInvoiceService invoiceService) : BaseController
             ReturnErrorResponse);
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetInvoice(string id)
     {
@@ -60,7 +61,7 @@ public class InvoicesController(IInvoiceService invoiceService) : BaseController
         var deleteInvoiceResult = await invoiceService.DeleteSingleInvoice(id);
         return deleteInvoiceResult.Match(_ => NoContent(), ReturnErrorResponse);
     }
-    
+
     [HttpGet("count")]
     public async Task<IActionResult> GetInvoiceCountForCurrentUserBusiness(string? filter = null)
     {

@@ -37,7 +37,7 @@ public class PaymentController(IPaymentService paymentService) : BaseController
     }
 
     [AllowAnonymous]
-    [HttpPost("process-payment")]
+    [HttpPost("complete")]
     public async Task<IActionResult> ProcessPaymentNotification(PaystackNotification notification)
     {
         var paymentCompletionRequest =

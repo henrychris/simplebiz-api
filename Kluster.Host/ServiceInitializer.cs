@@ -29,9 +29,9 @@ namespace Kluster.Host
         public static void ConfigureSerilog(this WebApplicationBuilder builder)
         {
             using var scope = builder.Services.BuildServiceProvider().CreateScope();
-            var configuration = scope.ServiceProvider.GetService<IConfiguration>();
-            var seqSettings = configuration?.GetSection(nameof(SeqSettings)).Get<SeqSettings>();
+            var seqSettings = scope.ServiceProvider.GetService<IOptionsSnapshot<SeqSettings>>()?.Value;
 
+            Console.WriteLine($"Using seq @ {seqSettings?.BaseUrl}");
             builder.Host.UseSerilog((_, lc) => lc
                 .WriteTo.Console(new JsonFormatter())
                 .WriteTo.Seq(seqSettings?.BaseUrl ?? "http://localhost:5341")
@@ -153,6 +153,7 @@ namespace Kluster.Host
             ConfigureSettings<PaystackSettings>(services, baseConfiguration);
             ConfigureSettings<JwtSettings>(services, baseConfiguration);
             ConfigureSettings<KeyVault>(services, baseConfiguration);
+            ConfigureSettings<SeqSettings>(services, baseConfiguration);
             Console.WriteLine("Secrets have been bound to classes.");
         }
 
