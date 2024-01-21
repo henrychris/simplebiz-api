@@ -1,6 +1,6 @@
 # API
 
-Welcome to the backend API for 'Simplifying Small Business Payments.'
+Welcome to the backend API for 'Simplifying Small Business Payments.' The application seeks to help small business easily issue invoices and manage payments they receive.
 
 ## Before You Begin
 
